@@ -1,0 +1,34 @@
+﻿Breeding Plan
+
+Day { 
+[ Usual Action = 90 Min / Exciting Action = 180 Min ]
+[ Breakfast = 60 Min / Lunch = 60 Min / Dinner = 60 Min ]
+[ Sleep = 360 Min / Asleep = 630 Min / Rest = No Limit ] }
+
+Ceremony Days { 
+[ B 1000 U 1130 L 1230 U 1400 E 1700 U 1830 U 2000 D 2100 E 2400 U 0130 S 0730 U 0900 ] 
+[ Production 8 Times on 15 Hours ] }
+
+Job Day { 
+[ B 1000 R 1200 L 1300 R 1530 U 1700 D1800 E 2100 E 2400 S 0600 E 0900 ]
+[ Production 4 Times on 10.5 Hours ] }
+
+Poor Day {
+[ B 1000 R 1200 L 1300 R 1700 D 1800 E 2100 A 0730 U 0900 ]
+[ Production 2 Times on 4.5 Hours ] }
+
+Worship Round{
+[ 00 C 01 C 02 C 03 J 04 C 05 C 06 C 07 C 08 C 09 C 10 C 11 P 12 P 13 P 14 C 15 J 16 C 17 C 18 C 19 P 20 ] 
+[ Ceremony 14 Days | Job 2 Days | Pool 4 Days | Production 128 Times on 20 Days ] }
+
+Ease Round{
+[ 00 J 01P 02 C 03 C 04 C 05 J 06 C 07 P 08 C 09 C 10 P 11 P 12 ]
+[ Ceremony 6 Days | Job 2 Days | Pool 4 Days | Production 64 Times on 12 Days ] }
+
+Leisure Round{
+[ 00 P 01 J 02 P 03 J 04 J 05 J 06 C 07 P 08 P 09 P 10 J 11 C 12 J 13 P 14 P 15 J 16 P 17 J 18 ]
+[ Ceremony 2 Days | Job 8 Days | Pool 8 Days | Production 64 Times on 18 Days ] }
+
+Revolution {
+[ 00 L 18 E 30 E 42 L 60 W 80 E 92 W 112 L 130 W 150 E 162 E 174 L 192 W 212 W 232 L 250 E 262 E 274 L 292 W 312 W 332 W 352 E 364 W 384 ]
+[ Worship 9 Rounds | Ease 8 Rounds | Leisure 6 Rounds | Ceremony 186 Days | Job 82 Days | Pool 116 Days | Production 2048 Times on 384 Days ] }
