@@ -32,10 +32,12 @@ Partial Class FrmMain
         Me.PtbLogo = New System.Windows.Forms.PictureBox()
         Me.BtnTest = New System.Windows.Forms.Button()
         Me.DtsDefine = New System.Data.DataSet()
-        Me.Action = New System.Data.DataTable()
+        Me.DtsProcedure = New System.Data.DataSet()
+        Me.DtsDoing = New System.Data.DataSet()
         CType(Me.PtbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DtsDefine, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Action, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DtsProcedure, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DtsDoing, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'BtnExit
@@ -126,12 +128,15 @@ Partial Class FrmMain
         '
         'DtsDefine
         '
-        Me.DtsDefine.DataSetName = "DataSet"
-        Me.DtsDefine.Tables.AddRange(New System.Data.DataTable() {Me.Action})
+        Me.DtsDefine.DataSetName = "DataDefine"
         '
-        'Action
+        'DtsProcedure
         '
-        Me.Action.TableName = "Action"
+        Me.DtsProcedure.DataSetName = "Procedure"
+        '
+        'DtsDoing
+        '
+        Me.DtsDoing.DataSetName = "DtsDoing"
         '
         'FrmMain
         '
@@ -156,7 +161,8 @@ Partial Class FrmMain
         Me.Text = "Breeding Plan"
         CType(Me.PtbLogo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DtsDefine, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Action, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DtsProcedure, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DtsDoing, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -170,6 +176,7 @@ Partial Class FrmMain
     Friend WithEvents BtnRevolution As Button
     Friend WithEvents PtbLogo As PictureBox
     Friend WithEvents BtnTest As Button
+    Friend WithEvents DtsProcedure As DataSet
     Friend WithEvents DtsDefine As DataSet
-    Friend WithEvents Action As DataTable
+    Friend WithEvents DtsDoing As DataSet
 End Class
