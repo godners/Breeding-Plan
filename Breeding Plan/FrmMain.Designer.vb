@@ -26,14 +26,14 @@ Partial Class FrmMain
         Me.BtnExit = New System.Windows.Forms.Button()
         Me.BtnAction = New System.Windows.Forms.Button()
         Me.LblTitle = New System.Windows.Forms.Label()
-        Me.BtnDay = New System.Windows.Forms.Button()
+        Me.BtnDays = New System.Windows.Forms.Button()
         Me.BtnRound = New System.Windows.Forms.Button()
         Me.BtnRevolution = New System.Windows.Forms.Button()
         Me.PtbLogo = New System.Windows.Forms.PictureBox()
-        Me.BtnTest = New System.Windows.Forms.Button()
         Me.DtsDefine = New System.Data.DataSet()
         Me.DtsProcedure = New System.Data.DataSet()
         Me.DtsDoing = New System.Data.DataSet()
+        Me.BtnExport = New System.Windows.Forms.Button()
         CType(Me.PtbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DtsDefine, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DtsProcedure, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -48,7 +48,7 @@ Partial Class FrmMain
         Me.BtnExit.Name = "BtnExit"
         Me.BtnExit.Size = New System.Drawing.Size(120, 36)
         Me.BtnExit.TabIndex = 0
-        Me.BtnExit.Text = "Exit"
+        Me.BtnExit.Text = "E&xit"
         Me.BtnExit.UseVisualStyleBackColor = True
         '
         'BtnAction
@@ -59,7 +59,7 @@ Partial Class FrmMain
         Me.BtnAction.Name = "BtnAction"
         Me.BtnAction.Size = New System.Drawing.Size(120, 36)
         Me.BtnAction.TabIndex = 1
-        Me.BtnAction.Text = "Action"
+        Me.BtnAction.Text = "&Action"
         Me.BtnAction.UseVisualStyleBackColor = True
         '
         'LblTitle
@@ -73,16 +73,16 @@ Partial Class FrmMain
         Me.LblTitle.Text = "Breeding Plan"
         Me.LblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'BtnDay
+        'BtnDays
         '
-        Me.BtnDay.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnDay.Location = New System.Drawing.Point(141, 57)
-        Me.BtnDay.Margin = New System.Windows.Forms.Padding(4)
-        Me.BtnDay.Name = "BtnDay"
-        Me.BtnDay.Size = New System.Drawing.Size(120, 36)
-        Me.BtnDay.TabIndex = 3
-        Me.BtnDay.Text = "Day"
-        Me.BtnDay.UseVisualStyleBackColor = True
+        Me.BtnDays.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnDays.Location = New System.Drawing.Point(141, 57)
+        Me.BtnDays.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnDays.Name = "BtnDays"
+        Me.BtnDays.Size = New System.Drawing.Size(120, 36)
+        Me.BtnDays.TabIndex = 3
+        Me.BtnDays.Text = "&Days"
+        Me.BtnDays.UseVisualStyleBackColor = True
         '
         'BtnRound
         '
@@ -92,7 +92,7 @@ Partial Class FrmMain
         Me.BtnRound.Name = "BtnRound"
         Me.BtnRound.Size = New System.Drawing.Size(120, 36)
         Me.BtnRound.TabIndex = 4
-        Me.BtnRound.Text = "Round"
+        Me.BtnRound.Text = "&Round"
         Me.BtnRound.UseVisualStyleBackColor = True
         '
         'BtnRevolution
@@ -103,7 +103,7 @@ Partial Class FrmMain
         Me.BtnRevolution.Name = "BtnRevolution"
         Me.BtnRevolution.Size = New System.Drawing.Size(120, 36)
         Me.BtnRevolution.TabIndex = 4
-        Me.BtnRevolution.Text = "Revolution"
+        Me.BtnRevolution.Text = "Re&volution"
         Me.BtnRevolution.UseVisualStyleBackColor = True
         '
         'PtbLogo
@@ -117,15 +117,6 @@ Partial Class FrmMain
         Me.PtbLogo.TabIndex = 5
         Me.PtbLogo.TabStop = False
         '
-        'BtnTest
-        '
-        Me.BtnTest.Location = New System.Drawing.Point(383, 184)
-        Me.BtnTest.Name = "BtnTest"
-        Me.BtnTest.Size = New System.Drawing.Size(75, 23)
-        Me.BtnTest.TabIndex = 6
-        Me.BtnTest.Text = "Test"
-        Me.BtnTest.UseVisualStyleBackColor = True
-        '
         'DtsDefine
         '
         Me.DtsDefine.DataSetName = "DataDefine"
@@ -138,17 +129,28 @@ Partial Class FrmMain
         '
         Me.DtsDoing.DataSetName = "DtsDoing"
         '
+        'BtnExport
+        '
+        Me.BtnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnExport.Location = New System.Drawing.Point(13, 145)
+        Me.BtnExport.Margin = New System.Windows.Forms.Padding(4)
+        Me.BtnExport.Name = "BtnExport"
+        Me.BtnExport.Size = New System.Drawing.Size(120, 36)
+        Me.BtnExport.TabIndex = 7
+        Me.BtnExport.Text = "&Export"
+        Me.BtnExport.UseVisualStyleBackColor = True
+        '
         'FrmMain
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.Black
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(274, 194)
         Me.ControlBox = False
-        Me.Controls.Add(Me.BtnTest)
+        Me.Controls.Add(Me.BtnExport)
         Me.Controls.Add(Me.PtbLogo)
         Me.Controls.Add(Me.BtnRevolution)
         Me.Controls.Add(Me.BtnRound)
-        Me.Controls.Add(Me.BtnDay)
+        Me.Controls.Add(Me.BtnDays)
         Me.Controls.Add(Me.LblTitle)
         Me.Controls.Add(Me.BtnAction)
         Me.Controls.Add(Me.BtnExit)
@@ -171,12 +173,12 @@ Partial Class FrmMain
     Friend WithEvents BtnExit As Button
     Friend WithEvents BtnAction As Button
     Friend WithEvents LblTitle As Label
-    Friend WithEvents BtnDay As Button
+    Friend WithEvents BtnDays As Button
     Friend WithEvents BtnRound As Button
     Friend WithEvents BtnRevolution As Button
     Friend WithEvents PtbLogo As PictureBox
-    Friend WithEvents BtnTest As Button
     Friend WithEvents DtsProcedure As DataSet
     Friend WithEvents DtsDefine As DataSet
     Friend WithEvents DtsDoing As DataSet
+    Friend WithEvents BtnExport As Button
 End Class

@@ -114,6 +114,12 @@
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="DataDefine.vb" />
     <Compile Include="Doing.vb" />
+    <Compile Include="FrmAction.Designer.vb">
+      <DependentUpon>FrmAction.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmAction.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmMain.Designer.vb">
       <DependentUpon>FrmMain.vb</DependentUpon>
     </Compile>
@@ -139,6 +145,9 @@
     <Compile Include="PublicScript.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FrmAction.resx">
+      <DependentUpon>FrmAction.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.vb</DependentUpon>
     </EmbeddedResource>
@@ -150,6 +159,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -164,6 +174,10 @@
   <ItemGroup>
     <Content Include="Logo.ico" />
     <Content Include="Note.txt" />
+    <None Include="Resources\Action-Sleeping.png" />
+    <None Include="Resources\Action-Resting.png" />
+    <None Include="Resources\Action-Eating.png" />
+    <None Include="Resources\Action-Breeding.png" />
     <None Include="Resources\Logo.png" />
   </ItemGroup>
   <ItemGroup>

@@ -1,7 +1,7 @@
 ﻿Friend Module Procedure
     Public Sub CreateProcedure()
         For Each tempRow In FrmMain.DtsDefine.Tables("Days").Rows
-            Call CreateDayProcedure(tempRow("Code"))
+            Call CreateDaysProcedure(tempRow("Code"))
         Next
         For Each tempRow In FrmMain.DtsDefine.Tables("Round").Rows
             Call CreateRoundProcedureByDay(tempRow("Code"))
@@ -11,21 +11,26 @@
             Call CreateRevolutionProcedure(tempRow("Code"))
         Next
     End Sub
-    Private Sub CreateDayProcedure(DayCode As String)
+    Private Sub CreateDaysProcedure(DayCode As String)
         Dim tempTable As DataTable = New DataTable()
         AddColumnToTable("System.UInt16", "Period", tempTable)
         AddColumnToTable("System.String", "Time", tempTable)
         AddColumnToTable("System.Char", "ActionCode", tempTable)
         AddColumnToTable("System.Byte", "ActionType", tempTable)
+        AddColumnToTable("System.UInt16", "ActionPeriod", tempTable)
+        AddColumnToTable("System.UInt16", "Force", tempTable)
+        AddColumnToTable("System.Boolean", "Utility", tempTable)
+        AddColumnToTable("System.Boolean", "Effect", tempTable)
         Dim StrProcedure As String = FrmMain.DtsDefine.Tables("Days").Select("Code='" & DayCode & "'")(0).Item("Procedure")
         Dim Period As UInt16 = 0
-        Dim i, j As UInt16
+        Dim i, j, m As UInt16
         Dim a As String
         For i = 0 To StrProcedure.Length - 1
             a = StrProcedure.Substring(i, 1)
-            For j = 1 To FrmMain.DtsDefine.Tables("Action").Select("Code='" & a & "'")(0).Item("Still") / 30
-                AddRowToDayProcedure(Period, a, tempTable)
-                Period += 1
+            m = FrmMain.DtsDoing.Tables(AbbrToFull(a)).Rows.Count - 1
+            For j = 0 To m
+                AddRowToDaysProcedure(Period, a, j, tempTable)
+                If j < m Then Period += 1
             Next
         Next
         tempTable.TableName = FrmMain.DtsDefine.Tables("Days").Select("Code='" & DayCode & "'")(0).Item("Description")
@@ -47,26 +52,31 @@
         temptable.Dispose()
     End Sub
     Private Sub CreateRoundProcedure(RoundCode As String)
-        Dim tempTable As DataTable = New DataTable
+        Dim tempTable As DataTable = New DataTable()
         AddColumnToTable("System.UInt16", "Period", tempTable)
-        AddColumnToTable("System.UInt16", "TimePeriod", tempTable)
         AddColumnToTable("System.UInt16", "DaysPeriod", tempTable)
-        AddColumnToTable("System.String", "Time", tempTable)
         AddColumnToTable("System.Char", "DaysCode", tempTable)
+        AddColumnToTable("System.UInt16", "TimePeriod", tempTable)
+        AddColumnToTable("System.String", "Time", tempTable)
+        AddColumnToTable("System.UInt16", "ActionPeriod", tempTable)
         AddColumnToTable("System.Char", "ActionCode", tempTable)
         AddColumnToTable("System.Byte", "ActionType", tempTable)
+        AddColumnToTable("System.UInt16", "Force", tempTable)
+        AddColumnToTable("System.Boolean", "Utility", tempTable)
+        AddColumnToTable("System.Boolean", "Effect", tempTable)
         Dim StrProcedure As String = FrmMain.DtsDefine.Tables("Round").Select("Code='" & RoundCode & "'")(0).Item("Procedure")
         Dim Period As UInt16 = 0
-        Dim i, j, k As UInt16
-        Dim d, a, StrSubProcedure As String
+        Dim i, j, k, m As UInt16
+        Dim d, a, StrDaysProcedure As String
         For i = 0 To StrProcedure.Length - 1
             d = StrProcedure.Substring(i, 1)
-            StrSubProcedure = FrmMain.DtsDefine.Tables("Days").Select("Code='" & d & "'")(0).Item("Procedure")
-            For j = 0 To StrSubProcedure.Length - 1
-                a = StrSubProcedure.Substring(j, 1)
-                For k = 1 To FrmMain.DtsDefine.Tables("Action").Select("Code='" & a & "'")(0).Item("Still") / 30
-                    AddRowToRoundProcedure(Period, d, a, tempTable)
-                    Period += 1
+            StrDaysProcedure = FrmMain.DtsDefine.Tables("Days").Select("Code='" & d & "'")(0).Item("Procedure")
+            For j = 0 To StrDaysProcedure.Length - 1
+                a = StrDaysProcedure.Substring(j, 1)
+                m = FrmMain.DtsDoing.Tables(AbbrToFull(a)).Rows.Count - 1
+                For k = 0 To m
+                    AddRowToRoundProcedure(Period, d, a, k, tempTable)
+                    If k < m Then Period += 1
                 Next
             Next
         Next
@@ -127,17 +137,6 @@
         tempRow("ActionType") = GetActionTypeByCode(inpA)
         oupTable.Rows.Add(tempRow)
     End Sub
-    Private Sub AddRowToRoundProcedure(inpP As UInt16, inpD As String, inpA As String, ByRef oupTable As DataTable)
-        Dim tempRow As DataRow = oupTable.NewRow
-        tempRow("Period") = inpP
-        tempRow("TimePeriod") = inpP Mod 48
-        tempRow("DaysPeriod") = Math.Floor(inpP / 48)
-        tempRow("Time") = PeriodToTime(inpP Mod 48)
-        tempRow("DaysCode") = inpD.ToCharArray()(0)
-        tempRow("ActionCode") = inpA.ToCharArray()(0)
-        tempRow("ActionType") = GetActionTypeByCode(inpA)
-        oupTable.Rows.Add(tempRow)
-    End Sub
     Private Sub AddRowToRoundProcedureByDay(inpP As UInt16, inpD As String, ByRef oupTable As DataTable)
         Dim tempRow As DataRow = oupTable.NewRow()
         tempRow("Period") = inpP
@@ -145,12 +144,34 @@
         tempRow("Breeds") = FrmMain.DtsDefine.Tables("Days").Select("Code='" & inpD & "'")(0).Item("Breeds")
         oupTable.Rows.Add(tempRow)
     End Sub
-    Private Sub AddRowToDayProcedure(inpP As UInt16, inpA As String, ByRef oupTable As DataTable)
+    Private Sub AddRowToDaysProcedure(inpP As UInt16, inpA As String, inpL As UInt16, ByRef oupTable As DataTable)
         Dim tempRow As DataRow = oupTable.NewRow()
         tempRow("Period") = inpP
         tempRow("Time") = PeriodToTime(inpP)
         tempRow("ActionCode") = inpA.ToCharArray()(0)
         tempRow("ActionType") = GetActionTypeByCode(inpA)
+        tempRow("ActionPeriod") = inpL
+        Dim tempRow2 As DataRow = FrmMain.DtsDoing.Tables(AbbrToFull(inpA)).Select("Time=" & (inpL * 10).ToString)(0)
+        tempRow("Force") = tempRow2("Force")
+        tempRow("Utility") = tempRow2("Utility")
+        tempRow("Effect") = tempRow2("Effect")
         oupTable.Rows.Add(tempRow)
     End Sub
+    Private Sub AddRowToRoundProcedure(inpP As UInt16, inpD As String, inpA As String, inpL As UInt16, ByRef oupTable As DataTable)
+        Dim tempRow As DataRow = oupTable.NewRow
+        tempRow("Period") = inpP
+        tempRow("DaysPeriod") = Math.Floor(inpP / 144)
+        tempRow("DaysCode") = inpD.ToCharArray()(0)
+        tempRow("TimePeriod") = inpP Mod 144
+        tempRow("Time") = PeriodToTime(inpP Mod 144)
+        tempRow("ActionPeriod") = inpL
+        tempRow("ActionCode") = inpA.ToCharArray()(0)
+        tempRow("ActionType") = GetActionTypeByCode(inpA)
+        Dim tempRow2 As DataRow = FrmMain.DtsDoing.Tables(AbbrToFull(inpA)).Select("Time=" & (inpL * 10).ToString)(0)
+        tempRow("Force") = tempRow2("Force")
+        tempRow("Utility") = tempRow2("Utility")
+        tempRow("Effect") = tempRow2("Effect")
+        oupTable.Rows.Add(tempRow)
+    End Sub
+
 End Module

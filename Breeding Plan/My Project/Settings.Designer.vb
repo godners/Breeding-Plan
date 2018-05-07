@@ -53,6 +53,24 @@ Namespace My
                 Return defaultInstance
             End Get
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("255, 192, 0")>  _
+        Public ReadOnly Property Yellow() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("Yellow"),Global.System.Drawing.Color)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Black")>  _
+        Public ReadOnly Property Black() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("Black"),Global.System.Drawing.Color)
+            End Get
+        End Property
     End Class
 End Namespace
 
